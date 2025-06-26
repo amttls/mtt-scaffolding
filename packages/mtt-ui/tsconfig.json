@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@repo/mtt-ui/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"], 
+  "exclude": ["dist", "build", "node_modules"]
+}

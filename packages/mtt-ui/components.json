@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@repo/mtt-ui/components",
+    "utils": "@repo/mtt-ui/lib/utils",
+    "ui": "@repo/mtt-ui/components",
+    "lib": "@repo/mtt-ui/lib",
+    "hooks": "@repo/mtt-ui/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+
