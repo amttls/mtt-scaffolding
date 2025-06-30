@@ -1,58 +1,171 @@
-# Turborepo Tailwind CSS starter
+# MTT Scaffolding - Modern Turborepo Setup
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, opinionated Turborepo setup featuring domain-driven architecture, a design system with shadcn/ui components, and hot module reloading for optimal development experience.
 
-## Using this example
+## 🚀 Features
 
-Run the following command:
+- **Domain-Driven Architecture**: Organized by business modules instead of technical layers
+- **Modern UI System**: Custom shadcn/ui package with hot reloading
+- **Full-Stack Monorepo**: Multiple apps sharing components and utilities
+- **Developer Experience**: Hot module reloading across packages, TypeScript, and modern tooling
+- **Production Ready**: Optimized builds with source file imports during development
 
-```sh
-npx create-turbo@latest -e with-tailwind
+## 📁 Project Structure
+
+```
+apps/
+├── web/                    # React app with Vite + TanStack Router
+│   ├── src/
+│   │   ├── modules/        # Domain-driven modules
+│   │   │   ├── form/       # Form-related components, routes, hooks
+│   │   │   ├── query/      # Query demo and related features
+│   │   │   └── dashboard/  # Dashboard functionality
+│   │   ├── shared/         # Shared components and utilities
+│   │   └── integrations/   # Third-party integrations (TanStack Query, etc.)
+│   └── ...
+├── docs/                   # Documentation app
+└── ...
+
+packages/
+├── mtt-ui/                 # Custom shadcn/ui component library
+│   ├── src/
+│   │   ├── components/     # shadcn/ui components
+│   │   ├── lib/           # Utilities (cn, etc.)
+│   │   └── hooks/         # Shared hooks
+│   └── ...
+├── eslint-config/         # Shared ESLint configurations
+├── typescript-config/     # Shared TypeScript configurations
+└── tailwind-config/      # Shared Tailwind configurations
 ```
 
-## What's inside?
+## 🛠 Tech Stack
 
-This Turborepo includes the following packages/apps:
+### Frontend
+- **React 19** with modern hooks and patterns
+- **Vite** for fast development and building
+- **TanStack Router** for type-safe routing
+- **TanStack Query** for server state management
+- **TanStack Form** for form handling with validation
 
-### Apps and Packages
+### UI & Styling
+- **shadcn/ui** components (custom package)
+- **Tailwind CSS 4** for styling
+- **Radix UI** primitives for accessibility
+- **Lucide Icons** for consistent iconography
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Development
+- **TypeScript 5.8** for type safety
+- **ESLint 9** for code linting
+- **Turborepo** for monorepo management
+- **pnpm** for package management
+- **tsup** for TypeScript compilation
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## 🚦 Getting Started
 
-### Building packages/ui
+### Prerequisites
+- Node.js 18+ 
+- pnpm (recommended) or npm
 
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
+### Installation
 
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
+```bash
+# Clone the repository
+git clone <repository-url>
+cd mtt-scaffolding
 
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+# Install dependencies
+pnpm install
 
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
+# Start development servers
+pnpm dev
 ```
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+### Available Scripts
 
-### Utilities
+```bash
+# Development
+pnpm dev          # Start all apps in development mode
+pnpm dev:web      # Start only the web app
+pnpm dev:docs     # Start only the docs app
 
-This Turborepo has some additional tools already setup for you:
+# Building
+pnpm build        # Build all apps and packages
+pnpm build:web    # Build only the web app
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+# Linting & Type Checking
+pnpm lint         # Lint all packages
+pnpm typecheck    # Type check all packages
+
+# UI Package Development
+pnpm --filter @repo/mtt-ui dev:components  # Watch UI components
+pnpm --filter @repo/mtt-ui build:components # Build UI components
+```
+
+## 🎨 UI Package Features
+
+The `@repo/mtt-ui` package provides:
+
+- **Hot Reloading**: Source file imports during development
+- **Production Optimized**: Built files for production
+- **Type Safety**: Full TypeScript support with proper exports
+- **Clean Imports**: Short import paths (`@repo/mtt-ui/button`)
+- **Accessibility**: Built on Radix UI primitives
+
+### Import Examples
+
+```typescript
+// Components
+import { Button } from "@repo/mtt-ui/button"
+import { Card, CardContent } from "@repo/mtt-ui/card"
+
+// Utilities
+import { cn } from "@repo/mtt-ui/utils"
+
+// Hooks
+import { useIsMobile } from "@repo/mtt-ui/use-mobile"
+```
+
+## 🏗 Architecture Principles
+
+### Domain-Driven Modules
+Instead of organizing by technical layers (`components/`, `hooks/`, `utils/`), we organize by business domains:
+
+```
+modules/
+├── form/           # Everything related to forms
+│   ├── components.tsx
+│   ├── hooks.ts
+│   ├── context.ts
+│   └── *.route.tsx
+├── user/           # User management features
+└── product/        # Product-related features
+```
+
+### Package Export Conditions
+The UI package uses export conditions for optimal DX:
+
+```json
+{
+  "./button": {
+    "source": "./src/components/button.tsx",    // Development (hot reload)
+    "types": "./src/components/button.tsx",
+    "import": "./dist/components/button.mjs",   // Production (optimized)
+    "require": "./dist/components/button.js"
+  }
+}
+```
+
+## 🔧 Development Workflow
+
+1. **Add New Components**: Place in appropriate module or shared directory
+2. **UI Components**: Add to `packages/mtt-ui/src/components/`
+3. **Export Updates**: Update `packages/mtt-ui/package.json` exports
+4. **Hot Reloading**: Changes reflect immediately during development
+5. **Production**: Run builds for optimized output
+
+## 📚 Learn More
+
+- [Turborepo Documentation](https://turborepo.org/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com)
+- [TanStack Documentation](https://tanstack.com)
+- [Tailwind CSS Documentation](https://tailwindcss.com)
