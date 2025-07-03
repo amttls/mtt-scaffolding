@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/server.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "verbatimModuleSyntax": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": ["shared/*"]
+    }
+  }
+}
