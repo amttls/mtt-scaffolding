@@ -20,8 +20,14 @@ apps/
 │   │   │   ├── form/       # Form-related components, routes, hooks
 │   │   │   ├── query/      # Query demo and related features
 │   │   │   └── dashboard/  # Dashboard functionality
-│   │   ├── shared/         # Shared components and utilities
+│   │   ├── shared/         # Shared definitions and utilities
 │   │   └── integrations/   # Third-party integrations (TanStack Query, etc.)
+│   └── ...
+├── api/                    # Type-safe REST API with OpenAPI documentation
+│   ├── src/
+│   │   ├── modules/        # Domain-driven API modules
+│   │   │   ├── user/       # User management endpoints
+│   │   └── shared/         # Shared utilities, middleware, and OpenAPI config
 │   └── ...
 ├── docs/                   # Documentation app
 └── ...
@@ -36,6 +42,7 @@ packages/
 ├── eslint-config/         # Shared ESLint configurations
 ├── typescript-config/     # Shared TypeScript configurations
 └── tailwind-config/      # Shared Tailwind configurations
+└── logger/      # Common configurations for the loggin system 
 ```
 
 ## 🛠 Tech Stack
@@ -47,6 +54,14 @@ packages/
 - **TanStack Router** for type-safe routing
 - **TanStack Query** for server state management
 - **TanStack Form** for form handling with validation
+
+### Backend
+
+- **Hono** web framework with TypeScript support
+- **@hono/zod-openapi** for type-safe API routes and OpenAPI generation
+- **Zod** for runtime type validation and schema generation
+- **Drizzle ORM** for database interactions
+- **PostgreSQL** as the primary database
 
 ### UI & Styling
 
@@ -89,12 +104,14 @@ pnpm dev
 ```bash
 # Development
 pnpm dev          # Start all apps in development mode
-pnpm dev:web      # Start only the web app
-pnpm dev:docs     # Start only the docs app
+pnpm run dev --filter=web      # Start only the web app
+pnpm run dev --filter=docs     # Start only the docs app
+pnpm run dev --filter=api      # Start only the API server
 
 # Building
 pnpm build        # Build all apps and packages
-pnpm build:web    # Build only the web app
+pnpm run build --filter=web    # Build only the web app
+pnpm run build --filter=api    # Build only the API
 
 # Linting & Type Checking
 pnpm lint         # Lint all packages
