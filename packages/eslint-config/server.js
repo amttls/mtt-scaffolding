@@ -25,10 +25,14 @@ export const serverConfig = [
     rules: {
       // Node.js specific rules
       "no-process-exit": "error",
+      "no-process-env": "error",
       "no-console": "warn",
       "prefer-const": "error",
       "no-var": "error",
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-explicit-any": "warn",
     },

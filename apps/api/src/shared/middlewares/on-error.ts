@@ -1,7 +1,19 @@
-import { INTERNAL_SERVER_ERROR_CODE, OK_CODE } from "@shared/http/status-codes";
 import type { ErrorHandler } from "hono";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 
+import env from "@/shared/env";
+import {
+  INTERNAL_SERVER_ERROR_CODE,
+  OK_CODE,
+} from "@/shared/http/status-codes";
+
+/**
+ * Global error handler middleware that catches and formats all application errors.
+ * Provides different response formats for production and development environments.
+ * @param err - The error object that was thrown
+ * @param c - Hono context object containing request and response utilities
+ * @returns JSON response with error details and appropriate HTTP status code
+ */
 const onError: ErrorHandler = (err, c) => {
   const currentStatus =
     "status" in err ? err.status : c.newResponse(null).status;
@@ -11,13 +23,11 @@ const onError: ErrorHandler = (err, c) => {
       ? (currentStatus as ContentfulStatusCode)
       : INTERNAL_SERVER_ERROR_CODE;
 
-  const env = c.env?.NODE_ENV || process.env?.NODE_ENV;
-
   return c.json(
     {
       message: err.message,
 
-      stack: env === "production" ? undefined : err.stack,
+      stack: env.NODE_ENV === "production" ? undefined : err.stack,
     },
     statusCode,
   );

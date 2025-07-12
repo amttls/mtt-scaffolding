@@ -1,5 +1,5 @@
 import { pino } from "pino";
-import { pinoLogger } from "hono-pino";
+import { PinoLogger, pinoLogger } from "hono-pino";
 import type { DebugLogOptions } from "hono-pino/debug-log";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -19,21 +19,22 @@ export const logger = pino({
     : undefined,
 });
 
-// Hono-specific logger with debug transport
-export function createHonoLogger(logLevel?: string) {
+// Hono logger wrapper
+export function honoPinoLogger(): ReturnType<typeof pinoLogger> {
   const debugOptions: DebugLogOptions = {};
 
-  return pino({
-    level: logLevel || (isDevelopment ? "debug" : "info"),
-    transport: isDevelopment
-      ? {
-          target: "hono-pino/debug-log",
-          options: debugOptions,
-        }
-      : undefined,
-    timestamp: pino.stdTimeFunctions.unixTime,
+  return pinoLogger({
+    pino: {
+      level: process.env.LOG_LEVEL || (isDevelopment ? "debug" : "info"),
+      transport: isDevelopment
+        ? {
+            target: "hono-pino/debug-log",
+            options: debugOptions,
+          }
+        : undefined,
+      timestamp: pino.stdTimeFunctions.unixTime,
+    },
   });
 }
 
-// Re-export hono-pino for convenience
-export { pinoLogger as honoPinoLogger };
+export { PinoLogger as HonoPinoLogger };

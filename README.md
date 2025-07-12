@@ -41,6 +41,7 @@ packages/
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **React 19** with modern hooks and patterns
 - **Vite** for fast development and building
 - **TanStack Router** for type-safe routing
@@ -48,12 +49,14 @@ packages/
 - **TanStack Form** for form handling with validation
 
 ### UI & Styling
+
 - **shadcn/ui** components (custom package)
 - **Tailwind CSS 4** for styling
 - **Radix UI** primitives for accessibility
 - **Lucide Icons** for consistent iconography
 
 ### Development
+
 - **TypeScript 5.8** for type safety
 - **ESLint 9** for code linting
 - **Turborepo** for monorepo management
@@ -63,7 +66,8 @@ packages/
 ## 🚦 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ### Installation
@@ -115,19 +119,20 @@ The `@repo/mtt-ui` package provides:
 
 ```typescript
 // Components
-import { Button } from "@repo/mtt-ui/button"
-import { Card, CardContent } from "@repo/mtt-ui/card"
+import { Button } from "@repo/mtt-ui/button";
+import { Card, CardContent } from "@repo/mtt-ui/card";
 
 // Utilities
-import { cn } from "@repo/mtt-ui/utils"
+import { cn } from "@repo/mtt-ui/utils";
 
 // Hooks
-import { useIsMobile } from "@repo/mtt-ui/use-mobile"
+import { useIsMobile } from "@repo/mtt-ui/use-mobile";
 ```
 
 ## 🏗 Architecture Principles
 
 ### Domain-Driven Modules
+
 Instead of organizing by technical layers (`components/`, `hooks/`, `utils/`), we organize by business domains:
 
 ```
@@ -142,14 +147,15 @@ modules/
 ```
 
 ### Package Export Conditions
+
 The UI package uses export conditions for optimal DX:
 
 ```json
 {
   "./button": {
-    "source": "./src/components/button.tsx",    // Development (hot reload)
+    "source": "./src/components/button.tsx", // Development (hot reload)
     "types": "./src/components/button.tsx",
-    "import": "./dist/components/button.mjs",   // Production (optimized)
+    "import": "./dist/components/button.mjs", // Production (optimized)
     "require": "./dist/components/button.js"
   }
 }
