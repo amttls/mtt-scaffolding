@@ -4,10 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --conditions=development src/index.ts",
     "build": "tsc && tsc-alias",
-    "start": "node dist/index.js",
-    "check-types": "tsc --noEmit"
+    "dev": "tsx watch --conditions=development src/index.ts",
+    "start": "node dist/src/index.js",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "clean": "rm -rf dist",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx src/shared/db/seed.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.15.0",

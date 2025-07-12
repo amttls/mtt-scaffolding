@@ -10,7 +10,8 @@
     "serve": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@repo/mtt-ui": "workspace:*",

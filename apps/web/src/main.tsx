@@ -11,13 +11,13 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import FormSimpleDemo from "./modules/form/simple.route.tsx";
 import FormAddressDemo from "./modules/form/address.route.tsx";
 import TanStackQueryDemo from "./modules/query/demo.route.tsx";
-import Dashboard from "./modules/dashboard/dashboard.route.tsx";
 
 import TanStackQueryLayout from "./integrations/tanstack-query/layout.tsx";
 
 import * as TanStackQueryProvider from "./integrations/tanstack-query/root-provider.tsx";
 
 import "./globals.css";
+
 import reportWebVitals from "./reportWebVitals.ts";
 
 import App from "./app.tsx";
@@ -27,7 +27,6 @@ const rootRoute = createRootRoute({
     <>
       <Outlet />
       <TanStackRouterDevtools />
-
       <TanStackQueryLayout />
     </>
   ),
@@ -41,7 +40,6 @@ const indexRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
-  Dashboard(rootRoute),
   FormSimpleDemo(rootRoute),
   FormAddressDemo(rootRoute),
   TanStackQueryDemo(rootRoute),
