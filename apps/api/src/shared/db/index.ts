@@ -1,11 +1,10 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-import { users } from "@/modules/user/user.schema";
-
+import schema from "@/shared/db/schema";
 import env from "@/shared/env";
 
 const client = postgres(env.DATABASE_URL);
-const db = drizzle(client, { schema: { users } });
+const db = drizzle(client, { schema });
 
 export default db;

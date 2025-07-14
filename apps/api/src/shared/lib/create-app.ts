@@ -1,3 +1,4 @@
+import type { Schema } from "hono";
 import { requestId } from "hono/request-id";
 
 import { honoPinoLogger } from "@repo/logger";
@@ -23,4 +24,13 @@ export default function createApp(): AppOpenAPI {
   app.onError(onError);
 
   return app;
+}
+
+/**
+ * Creates a test application instance with a router mounted at the root
+ * @param router - The router to mount on the test app
+ * @returns The configured test application
+ */
+export function createTestApp<S extends Schema>(router: AppOpenAPI<S>) {
+  return createApp().route("/", router);
 }

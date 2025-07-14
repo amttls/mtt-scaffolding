@@ -24,6 +24,17 @@
       "cache": false,
       "persistent": true,
       "env": ["NODE_ENV"]
+    },
+    "test": {
+      "dependsOn": ["transit", "@repo/vitest-config#build"],
+      "outputs": ["coverage.json"]
+    },
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

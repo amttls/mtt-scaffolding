@@ -10,6 +10,8 @@
     "check-types": "tsc --noEmit",
     "lint": "eslint src --max-warnings 0",
     "clean": "rm -rf dist",
+    "test": "LOG_LEVEL=silent vitest run",
+    "test:watch": "LOG_LEVEL=silent vitest",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
@@ -32,16 +34,21 @@
   },
   "devDependencies": {
     "@asteasolutions/zod-to-openapi": "^7.3.4",
+    "@electric-sql/pglite": "^0.3.4",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/vitest-config": "workspace:*",
     "@testing-library/dom": "^10.4.0",
     "@types/node": "^24.0.10",
     "@types/pg": "^8.15.4",
+    "@vitest/coverage-istanbul": "^3.2.4",
     "drizzle-kit": "0.31.4",
     "eslint": "^9.29.0",
     "openapi3-ts": "^4.5.0",
+    "pg-mem": "^3.0.5",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.7.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.7"
   }
 }
