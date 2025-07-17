@@ -45,7 +45,6 @@
     "drizzle-kit": "0.31.4",
     "eslint": "^9.29.0",
     "openapi3-ts": "^4.5.0",
-    "pg-mem": "^3.0.5",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3",

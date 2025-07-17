@@ -6,11 +6,7 @@ import {
   selectUsersSchema,
 } from "@/modules/user/user.schema";
 
-import {
-  jsonContent,
-  jsonContentOneOf,
-  jsonContentRequired,
-} from "@/shared/openapi/helpers";
+import { jsonContent, jsonContentRequired } from "@/shared/openapi/helpers";
 import {
   NO_CONTENT_CODE,
   NOT_FOUND_CODE,
@@ -78,8 +74,8 @@ export const patch = createRoute({
   responses: {
     [OK_CODE]: jsonContent(selectUsersSchema, "The updated user"),
     [NOT_FOUND_CODE]: jsonContent(notFoundSchema, "User not found"),
-    [UNPROCESSABLE_ENTITY_CODE]: jsonContentOneOf(
-      [createErrorSchema(insertUserSchema), createErrorSchema(IdParamsSchema)],
+    [UNPROCESSABLE_ENTITY_CODE]: jsonContent(
+      createErrorSchema(patchUserSchema).or(createErrorSchema(IdParamsSchema)),
       "The validation error(s)",
     ),
   },
@@ -97,7 +93,7 @@ export const remove = createRoute({
     [NOT_FOUND_CODE]: jsonContent(notFoundSchema, "User not found"),
     [UNPROCESSABLE_ENTITY_CODE]: jsonContent(
       createErrorSchema(IdParamsSchema),
-      "The validation error(s)",
+      "Invalid ID error",
     ),
   },
 });
