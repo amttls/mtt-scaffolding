@@ -12,13 +12,17 @@ export const users = pgTable("users", {
     .$onUpdate(() => new Date()),
 });
 
-export const selectUsersSchema = createSelectSchema(users);
+export const selectUsersSchema = createSelectSchema(users).openapi("User");
+
 export const insertUserSchema = createInsertSchema(users, {
   username: (schema) => schema.username.min(1).max(100),
   email: (schema) => schema.email.min(1).max(100).email(),
-}).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-});
-export const patchUserSchema = insertUserSchema.partial();
+})
+  .omit({
+    id: true,
+    createdAt: true,
+    updatedAt: true,
+  })
+  .openapi("CreateUser");
+
+export const patchUserSchema = insertUserSchema.partial().openapi("UpdateUser");

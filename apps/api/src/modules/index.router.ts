@@ -19,7 +19,7 @@ const indexRouter = createRouter().openapi(
   (c) => {
     return c.json(
       {
-        message: "Tasks API",
+        message: "MTT API",
       },
       OK_CODE,
     );
