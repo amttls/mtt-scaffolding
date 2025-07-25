@@ -7,9 +7,10 @@
 - **Lint**: `turbo lint` (parallel lint across apps)
 - **Type Check**: `turbo check-types` (parallel type checking)
 - **Format**: `turbo format` (prettier format - root only)
-- **Test**: `turbo test --filter=web` (vitest for web app)
+- **Test**: `turbo test --filter=web` (vitest for web app), `turbo test --filter=api` (API tests)
 - **Single App**: Use `--filter` flag (e.g., `turbo dev --filter=api`)
-- **Single Test**: `cd apps/web && pnpm vitest run <test-file>`
+- **Single Test**: `turbo test --filter=web -- <test-file>` or `turbo test --filter=api -- <test-file>`
+- **Database**: `turbo run db:generate/migrate/studio/push/seed --filter=api` (from root)
 
 ## Code Style Guidelines
 
