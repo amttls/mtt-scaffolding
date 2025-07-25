@@ -11,7 +11,7 @@ const routes = [indexRouter, userRouter] as const;
 configureOpenAPI(app);
 
 for (const route of routes) {
-  app.route("/v1", route);
+  app.route("/api", route);
 }
 
 export type AppType = (typeof routes)[number];
