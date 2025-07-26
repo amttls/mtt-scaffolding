@@ -1,5 +1,7 @@
 import { PGlite } from "@electric-sql/pglite";
 import { drizzle } from "drizzle-orm/pglite";
+// Import zod-openapi to extend zod prototype before any schema imports
+import "@hono/zod-openapi";
 
 import schema from "@/shared/db/schema";
 

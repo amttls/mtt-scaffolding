@@ -26,7 +26,7 @@
       "env": ["NODE_ENV"]
     },
     "test": {
-      "dependsOn": ["transit", "@repo/vitest-config#build"],
+      "dependsOn": ["transit"],
       "outputs": ["coverage.json"]
     },
     "transit": {
