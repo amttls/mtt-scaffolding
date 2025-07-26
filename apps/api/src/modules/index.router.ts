@@ -9,6 +9,7 @@ const indexRouter = createRouter().openapi(
     tags: ["Index"],
     method: "get",
     path: "/",
+    operationId: "getIndex",
     responses: {
       [OK_CODE]: jsonContent(
         createMessageObjectSchema("MTT API"),
