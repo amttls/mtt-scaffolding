@@ -25,6 +25,7 @@ export const list = createRoute({
   tags,
   method: "get",
   path: "/users",
+  operationId: "getUsers",
   responses: {
     [OK_CODE]: jsonContent(z.array(selectUsersSchema), "The list of users"),
   },
@@ -34,6 +35,7 @@ export const findOne = createRoute({
   tags,
   method: "get",
   path: "/users/{id}",
+  operationId: "getUser",
   request: {
     params: IdParamsSchema,
   },
@@ -51,6 +53,7 @@ export const create = createRoute({
   tags,
   method: "post",
   path: "/users",
+  operationId: "createUser",
   request: {
     body: jsonContentRequired(insertUserSchema, "The user to create"),
   },
@@ -67,6 +70,7 @@ export const patch = createRoute({
   tags,
   method: "patch",
   path: "/users/{id}",
+  operationId: "updateUser",
   request: {
     params: IdParamsSchema,
     body: jsonContentRequired(patchUserSchema, "The user to update"),
@@ -85,6 +89,7 @@ export const remove = createRoute({
   tags,
   method: "delete",
   path: "/users/{id}",
+  operationId: "deleteUser",
   request: {
     params: IdParamsSchema,
   },

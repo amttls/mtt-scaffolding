@@ -8,6 +8,8 @@ import type { AppOpenAPI } from "@/shared/lib/types";
 import onError from "@/shared/middlewares/on-error";
 import notFound from "@/shared/middlewares/not-found";
 import serveEmojiFavicon from "@/shared/middlewares/serve-emoji-favicon";
+import { cors } from "hono/cors";
+import env from "@/shared/env";
 
 /**
  * Creates and configures the main Hono application with middleware
@@ -19,6 +21,15 @@ export default function createApp(): AppOpenAPI {
   app.use(serveEmojiFavicon("⚡"));
   app.use(requestId());
   app.use(honoPinoLogger());
+
+  if (env.NODE_ENV === "development") {
+    app.use(
+      "*",
+      cors({
+        origin: "http://localhost:3000",
+      }),
+    );
+  }
 
   app.notFound(notFound);
   app.onError(onError);

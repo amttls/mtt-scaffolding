@@ -6,7 +6,14 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [viteReact(), tailwindcss()],
   resolve: {
-    conditions: ["source", "import", "module", "browser", "default"],
+    conditions: [
+      "source",
+      "import",
+      "module",
+      "browser",
+      "default",
+      "development",
+    ],
   },
   test: {
     globals: true,
